@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-cocktail">
+        <div class="cocktail-item">
+            <div class="cocktail-name">
+                <div class="coct-name1">
+                    {{ cocktail.name }}
+                </div>
+                <div class="star">
+                    {% if request.user in cocktail.my_favorites.all %}
+                        <a href="{% url 'cocktail-like' pk=cocktail.pk %}" class="favorite-star">
+                        <i class="fas fa-star"></i>
+                    {% else %}
+                        <a href="{% url 'cocktail-like' pk=cocktail.pk %}" class="off-favorite-star">
+                        <i class="far fa-star"></i>
+                    {% endif %}
+
+                    </a>
+                </div>
+            </div>
+            <div class="cocktail-cook-desc">
+                <div class="text-cooking_method-description">Метод приготовления:</div>
+                <div class="coct-text">{{ cocktail.cooking_method }}</div>
+                <div class="text-cooking_method-description">Описание:</div>
+                <div class="coct-text">{{ cocktail.description }}</div>
+            </div>
+
+            <div class="coct-ingredient">
+                <div class="text-ingredients">Ингредиенты:</div>
+                <div id="ingredients"> {{ cocktail.ingredient }}</div>
+            </div>
+
+            <div class="image-cocktail">
+                <div class="image-cocktail1">
+                    {% if cocktail.image %}
+                        <div class="image-cocktail2">
+                            <img class="image-cocktail3" src="{{ cocktail.image.url }}" alt="{{ cocktail.name }}"/>
+                        </div>
+                    {% endif %}
+
+                    {% if cocktail.image_url %}
+                        <div class="image-cocktail2">
+                            <img class="image-cocktail3" src="{{ cocktail.image_url }}" alt="{{ cocktail.name }}"/>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="comments">
+            <div class="comment-stripe"></div>
+            <form action="{% url 'add-comment' pk=cocktail.pk %}" method="post">
+                {% csrf_token %}
+                <div class="comment-user">{{ request.user.username }}</div>
+                <label for="commentText"></label>
+                <textarea name="text" id="commentText" class="text_comment"
+                          placeholder="Добавьте ваш комментарий здесь..."></textarea>
+                <button class="button-save-comment" type="submit">Оставить комментарий</button>
+            </form>
+            <div class="comment-stripe"></div>
+            <div class="all_comments">
+                <div class="comments-head">Комментарии</div>
+                {% for comment in top_level_comments %}
+                    <div class="contain-comment">
+                        <div class="comment" id="comment-{{ comment.pk }}">
+                            <div class="comment-creator">Автор: {{ comment.creator.username }}</div>
+                            <div class="comment-date">Дата: {{ comment.date }}</div>
+                            <div class="comment-text">{{ comment.text }}</div>
+                            <button class="reply-button" onclick="showReplyForm('{{ comment.pk }}')">Ответить</button>
+                        </div>
+                        {% if request.user == comment.creator %}
+                            <form action="{% url 'delete-comment' pk=comment.pk %}" method="post">
+                                {% csrf_token %}
+                                <button class="button-delete-comment" type="submit">Удалить</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <div id="reply-form-{{ comment.pk }}" class="reply-form">
+                        <form action="{% url 'add-comment' pk=cocktail.pk %}" method="post">
+                            {% csrf_token %}
+                            <div class="comment-user">{{ request.user.username }}</div>
+                            <label for="commentText"></label>
+                            <textarea id="commentText" name="text" class="text_comment1"
+                                      placeholder="Добавьте ваш комментарий здесь..."></textarea>
+                            <input type="hidden" name="parent_id" value="{{ comment.pk }}">
+                            <button class="button-save-comment" type="submit">Оставить комментарий</button>
+                        </form>
+                    </div>
+                    <div class="child-comments">
+                        {% for child_comment in comment.replies.all  %}
+                            <div class="contain-comment" style="margin-left: 60px; width: auto">
+                                <div class="comment" id="comment-{{ child_comment.pk }}">
+                                    <div class="comment-creator">Автор: {{ child_comment.creator.username }}</div>
+                                    <div class="comment-date">Дата: {{ child_comment.date }}</div>
+                                    <div class="comment-text">{{ child_comment.text }}</div>
+                                </div>
+                                {% if request.user == child_comment.creator  %}
+                                    <form action="{% url 'delete-comment' pk=child_comment.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="button-delete-comment" type="submit">Удалить</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% empty %}
+                    <p class="not_com">Комментариев пока нет.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

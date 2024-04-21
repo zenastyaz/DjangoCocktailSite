@@ -1,0 +1,531 @@
+/*-----------------list-coctails----------------*/
+.archived-overlay{
+    text-decoration: none;
+    color: #989898;
+    font-size: 3rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.container-filter{
+    width: 20%;
+    /*margin-left: 74%;*/
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    margin-bottom: 1%;
+}
+
+.filter{
+
+}
+.filter input {
+    height: 1vh;
+    background-color: rgb(39 39 42 / 1);
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #464646;
+    margin-bottom: 1%;
+    border-radius: 0.3rem;
+
+}
+
+#list_category select{
+    border: 1px solid #464646;
+    background-color: rgb(39 39 42 / 1);
+    border-radius: 0.3rem;
+    color: #797979;
+}
+
+.container-coct-list-1{
+    padding-top: 6rem;
+}
+
+.container-coct-list {
+    display: flex;
+    flex-wrap: nowrap; /* Предотвращение переноса элементов на новую строку */
+    overflow-x: auto;
+    scroll-behavior: smooth; /* Делает прокрутку плавной */
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel {
+
+}
+
+#coct-item {
+    display: inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
+
+
+    flex-shrink: 0;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+
+#coct-item.active {
+    transform: scale(1.1);
+    z-index: 10;
+    opacity: 1;
+}
+
+
+#coct-item:not(.active) {
+    opacity: 0.5;
+    transform: scale(1);
+}
+
+.coct-list-img {
+
+}
+
+.coct-list-img1 {
+    object-fit: cover;
+    flex: 1;
+}
+
+.carousel-img {
+    width: 20rem;
+    height: 30rem;
+}
+
+.coct-overlay {
+
+}
+
+.coct-name, .coct-compound {
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 10px;
+    z-index: 5;
+}
+
+.coct-name {
+    margin-top: 7%;
+    font-size: 1.3rem;
+}
+
+.coct-compound {
+    margin-top: 18%;
+    font-size: 1rem;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    z-index: 20;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+/*------button-------*/
+.dropbtn {
+    background: transparent;
+    color: #A2a2a2;
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    display: block;
+    margin-left: 91%;
+    z-index: 5;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    min-width: 140px;
+    z-index: 1;
+    right: -5rem;
+}
+
+.dropdown-content a {
+    color: #7d6520;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #242525;
+}
+
+.menu__item-archive{
+    padding: 10px 20px;
+    color: #7d6520;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    border: 0;
+    width: 10rem;
+    text-align: left;
+}
+
+.menu__item-archive:hover {
+    background-color: #f1f1f1
+}
+/*-----------------list-coctails-END----------------*/
+
+/*-----------------create----------------*/
+.container-create{
+    padding-top: 8rem;
+    text-align: center;
+}
+
+.create {
+    height: 50rem;
+    width: 40rem;
+    background-color: #222327;
+    border-radius: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.button-save {
+    margin-bottom: 2rem;
+    background-color: #7d6520;
+    border: none;
+    color: #dbd2ba;
+    padding: 9px 92px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 9px;
+
+}
+
+.button-save:hover {
+    background-color: #524321;
+    color: white;
+}
+
+.cr-text-name, .cr-text-compound, .cr-text-description, .cr-text-ingredient, .cr-text-cooking_method, .cr-text-category {
+    color: #dbd2ba;
+    font-size: 20px;
+    margin-bottom: 0.7rem;
+}
+
+.cr-name input, .cr-compound input {
+    margin-bottom: 0.7rem;
+    width: 60%;
+    height: 2rem;
+    text-align: center;
+}
+
+.cr-name, .cr-compound {
+    margin-bottom: 1rem;
+}
+
+#unique_category{
+    margin-bottom: 1rem;
+}
+
+.cr-description textarea, .cr-ingredient textarea, .cr-cooking_method textarea {
+    width: 90%;
+    height: 4rem;
+    text-align: center;
+    line-height: 4rem;
+}
+
+.cr-text-image, .cr-text-image-url {
+    color: #dbd2ba;
+    margin-bottom: 0.7rem;
+
+}
+
+.cr-image input {
+    width: 50%;
+}
+
+.cr-image input[placeholder] {
+    color: #dbd2ba;
+}
+
+.cr-image, .cr-image-url {
+    margin-bottom: 1.5rem;
+}
+
+.cr-image-url input {
+    width: 60%;
+    height: 1.5rem;
+}
+
+/*-----------------create-END----------------*/
+/*---------------------------------------Cocktail---------------------------------------*/
+.container-cocktail{
+    padding-top: 5.4rem;
+}
+.cocktail-item{
+    display: inline-block;
+    margin-right: 10%;
+    height: auto;
+    width: auto;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    background-color: #333333;
+    border-radius: 5%;
+    padding: 2rem 3rem;
+    position: relative;
+}
+.cocktail-name{
+
+
+}
+.coct-name1{
+    float: left;
+    width: 97%;
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2%;
+
+}
+
+.star{
+    float: right;
+    width: 3%;
+}
+
+.favorite-star{
+    color: #7d6520;
+    font-size: 2.5rem;
+}
+
+.off-favorite-star{
+    color: #7d6520;
+    font-size: 2.5rem;
+}
+
+.cocktail-cook-desc{
+
+    float: right;
+    width: 55%;
+    position: relative;
+
+
+}
+
+.text-cooking_method-description{
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1%;
+    margin-top: 5%;
+}
+.coct-text{
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 8%;
+    line-height: 1.5;
+}
+
+.coct-ingredient{
+    margin-left: 1%;
+    width: 35%;
+}
+
+.text-ingredients{
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1%;
+}
+#ingredients{
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 2%;
+    line-height: 1.5;
+
+}
+
+.image-cocktail{
+    display: block;
+    width: 23vw;
+}
+
+.image-cocktail3{
+    width: 23vw;
+    height: 52vh;
+    border-radius: 10px;
+}
+/*///////////COMMENT///////////*/
+.comments{
+    display: inline-block;
+    margin-right: 10%;
+    height: auto;
+    width: auto;
+    margin-left: 10%;
+    padding: 2rem 3rem;
+}
+
+.comment-user{
+    color: #7d6520;
+    font-size: 20px;
+    font-weight: 900;
+    margin-block: 1%;
+}
+
+.text_comment{
+    height: 4vh;
+    width: 70vw;
+    background-color: rgb(39 39 42 / 1);
+    color: #9f9f9f;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #464646;
+}
+
+.button-save-comment{
+    margin-bottom: 2rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    color: #7d6520;
+    padding: 9px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 9px;
+}
+
+.button-save-comment:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+.comment-stripe{
+    background-color: #5d4831;
+    height: 0.1rem;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.all_comments{
+}
+
+.comments-head{
+    font-size: 2rem;
+    color: #7d6520;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.contain-comment{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.comment{
+    color: #b7b7b7;
+    margin-bottom: 3%;
+    float: left;
+}
+.comment-creator{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.comment-date{
+    font-size: 15px;
+     font-style: italic;
+    margin-bottom: 1%;
+}
+
+.comment-text{
+    font-size: 25px;
+    margin-bottom: 3%;
+}
+
+.button-delete-comment{
+    float: right;
+    vertical-align: middle;
+    margin-bottom: 2rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    color: #7d6520;
+    padding: 9px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 9px;
+}
+
+.reply-form{
+    display: none;
+}
+
+.text_comment1{
+    height: 4vh;
+    margin-left: 5vw;
+    width: 60vw;
+    background-color: rgb(39 39 42 / 1);
+    color: #9f9f9f;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #464646;
+}
+
+.reply-button{
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    color: #7d6520;
+    padding: 9px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 9px;
+}
+
+
+
+.not_com{
+    color: #7d6520;
+    text-align: center;
+}
+/*--------------------------------------Cocktail-END-------------------------------------*/

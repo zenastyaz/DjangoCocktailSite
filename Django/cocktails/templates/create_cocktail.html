@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-create">
+    <div class="create">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="cr-name">
+                <div class="cr-text-name">Название коктейля </div>{{ form.name }}
+            </div>
+            <div class="cr-compound">
+                <div class="cr-text-compound">Компоненты коктейля </div>{{ form.compound }}
+            </div>
+            <div class="cr-category" id="unique_category">
+                <div class="cr-text-category">Категория </div>{{ form.category }}
+            </div>
+            <div class="cr-description">
+                <div class="cr-text-description">Описание коктейля </div>{{ form.description }}
+            </div>
+            <div class="cr-ingredient">
+                <div class="cr-text-ingredient">Ингредиенты коктейля </div>{{ form.ingredient }}
+            </div>
+            <div class="cr-cooking_method">
+                <div class="cr-text-cooking_method">Способ приготовления </div>{{ form.cooking_method }}
+            </div>
+            <div class="cr-image">
+                <div class="cr-text-image">Загрузить изображение коктейля </div>{{ form.image }}
+            </div>
+            <div class="cr-image-url">
+                <div class="cr-text-image-url">Указать ссылку на изображение </div>{{ form.image_url }}
+            </div>
+            <button class="button-save" type="submit">{% if form.instance.pk %}Обновить{% else %}Сохранить{% endif %}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

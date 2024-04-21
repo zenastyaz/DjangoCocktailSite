@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="update-1">
+        <div class="update">
+            <form method="post">
+                <div class="image-logo-login"></div>
+                <div class="white-stripe"></div>
+                {% csrf_token %}
+                <div class="update-profile">
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="update-profile">
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="error">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="update-profile">
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        <div class="error">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="update-profile">
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                        <div class="error">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+                <button class="button-sign_in" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-coct-list-1">
+        <form method="get">
+            <div class="container-filter">
+                <div class="filter" id="list_category">
+                    {% for field in filter.form %}
+                        {{ field }}
+                    {% endfor %}
+    
+                </div>
+            </div>
+        </form>
+        <div class="container-coct-list">
+            {% for cocktail in cocktail_list %}
+                <div id="coct-item">
+                    <div class="coct-overlay">
+                        <div class="coct-name">{{ cocktail.name }}</div>
+                        <div class="coct-compound">{{ cocktail.compound }}</div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">⋮</button>
+                        <div class="dropdown-content">
+                            <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+                            {% if request.resolver_match.url_name == 'my-cocktail' %}
+                                <form method="post" action="{% url 'archive_cocktail' pk=cocktail.id %}">
+                                    {% csrf_token %}
+                                    {% if cocktail.is_archived %}
+                                        <input type="hidden" name="action" value="off_archive">
+                                        <button type="submit" class="menu__item-archive">Разархивировать</button>
+                                    {% else %}
+                                        <input type="hidden" name="action" value="archive">
+                                        <button type="submit" class="menu__item-archive">Архивировать</button>
+                                    {% endif %}
+                                </form>
+                            {% endif %}
+                            <a class="menu__item" href="{% url 'update-cocktail' pk=cocktail.id %}">Обновить
+                                коктейль</a>
+                            {% if request.user in cocktail.my_favorites.all %}
+                                <a class="menu__item" href="{% url 'cocktail-like' pk=cocktail.pk %}">Убрать из
+                                    избранного</a>
+                            {% else %}
+                                <a class="menu__item" href="{% url 'cocktail-like' pk=cocktail.pk %}">Добавть в
+                                    избранное </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="carousel">
+                        <div class="coct-list-img">
+                            {% if cocktail.image %}
+                                <div class="coct-list-img1">
+                                    <a class="img-coct" href="{% url 'cocktail' pk=cocktail.id %}">
+                                        <img class="carousel-img" src="{{ cocktail.image.url }}"
+                                             alt="{{ cocktail.name }}"/>
+                                        {% if cocktail.is_archived %}
+                                            <div class="archived-overlay">Архивировано</div>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            {% endif %}
+
+                            {% if cocktail.image_url %}
+                                <div class="coct-list-img1">
+                                    <a class="img-coct" href="{% url 'cocktail' pk=cocktail.id %}">
+                                        <img class="carousel-img" src="{{ cocktail.image_url }}"
+                                             alt="{{ cocktail.name }}"/>
+                                        {% if cocktail.is_archived %}
+                                            <div class="archived-overlay">Архивировано</div>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </div>
+{% endblock %}
