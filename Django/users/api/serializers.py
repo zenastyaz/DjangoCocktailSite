@@ -36,3 +36,9 @@ class RegisterSerializer(serializers.ModelSerializer):
     #         "access": str(refresh.access_token)
     #     }
     #     return data
+
+
+class UserSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username']

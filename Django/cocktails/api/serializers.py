@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from cocktails.models import Cocktail, Comment
+from cocktails.models import Cocktail, Comment, Favorite
 from categories.models import Category
+from users.api.serializers import UserSimpleSerializer
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -39,6 +40,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class CocktailSerializer(serializers.ModelSerializer):
+    creator = serializers.CharField(read_only=True)
     image = serializers.ImageField(required=False)
     image_url = serializers.URLField(required=False)
 
@@ -54,6 +56,14 @@ class CocktailSerializer(serializers.ModelSerializer):
             "is_archived",
         ]
 
+    def create(self, validated_data):
+        validated_data['creator'] = self.context['request'].user
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        validated_data.pop('creator', None)
+        return super().update(instance, validated_data)
+
 
 class CocktailsDetailSerializer(CocktailSerializer):
 
@@ -66,3 +76,24 @@ class CocktailsDetailSerializer(CocktailSerializer):
             "my_favorites",
             "category",
         ]
+
+
+class CocktailSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cocktail
+        fields = ['id', 'name', 'image_url']
+
+
+class FavoritesSerializer(serializers.ModelSerializer):
+    cocktail = CocktailSimpleSerializer(read_only=True)
+    user = UserSimpleSerializer(read_only=True)
+
+    class Meta:
+        model = Favorite
+        fields = [
+            "id",
+            "cocktail",
+            "user",
+        ]
+
+
